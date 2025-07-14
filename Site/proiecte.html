@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proiecte</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #003380;
+            --secondary-blue: #00509e;
+            --accent-gold: #d4af37;
+            --light-bg: #f5f9ff;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .header-container {
+            width: 100%;
+            height: 320px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .header-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            z-index: 1;
+            filter: grayscale(30%) brightness(80%);
+        }
+
+        #md, #m {
+            height: 180px;
+            width: auto;
+            position: absolute;
+            top: 50px;
+            z-index: 3;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8));
+            transition: var(--transition);
+        }
+        
+        #md {
+            left: 80px;
+        }
+        
+        #m {
+            right: 80px;
+        }
+
+        #md:hover, #m:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 100px;
+            color: var(--text-light);
+            margin: 0;
+            position: absolute;
+            left: 50%;
+            top: 80px;
+            transform: translateX(-50%);
+            z-index: 3;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            z-index: 4;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .buttons-container button {
+            background-color: var(--primary-blue);
+            height: 55px;
+            width: 170px;
+            color: var(--text-light);
+            font-size: 19px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 4px solid var(--accent-gold);
+            font-weight: 600;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .buttons-container button:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .content-section h2 {
+            color: var(--primary-blue);
+            font-size: 38px;
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .content-section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--accent-gold);
+            border-radius: 2px;
+        }
+
+        .intro-text {
+            font-size: 19px;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--text-dark);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            border-top: 5px solid var(--primary-blue);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--accent-gold);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            font-weight: 700;
+        }
+
+        .project-info h3 {
+            color: var(--secondary-blue);
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .project-info p {
+            font-size: 16px;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            flex-grow: 1;
+            text-align: justify;
+        }
+
+        .project-info a.read-more {
+            display: inline-block;
+            background-color: var(--accent-gold);
+            color: var(--primary-blue);
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            transition: var(--transition);
+            margin-top: 15px;
+        }
+
+        .project-info a.read-more:hover {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+        }
+
+        footer {
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+       
+
+       @media (max-width: 1360px) {
+            #m {
+            margin-left: 5%;
+            }
+
+            #md{
+            margin-right: 5%;
+            }
+
+            h1{
+                font-size:70px ;
+            }
+        }
+
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 70px;
+                top: 70px;
+            }
+
+            #md{
+                height: 200px;
+                top: 40px;
+                left: 5%;
+            }
+
+            #m{
+                height: 200px;
+                top: 40px;
+                right: 5%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 48px;
+                top: 35%;
+                transform: translateX(0);
+                margin-left: -43%;
+            }
+            
+            #md, #m {
+                height: 100px;
+                top: 20px;
+            }
+            
+            #md {
+                left: 10px;
+            }
+            
+            #m {
+                right: 10px;
+            }
+            
+            .buttons-container {
+                top: auto;
+                bottom: 10px;
+                flex-wrap: wrap;
+                gap: 5px;
+                margin-top: 700px;
+            }
+            
+            .buttons-container button {
+                width: 140px;
+                font-size: 16px;
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 50px;
+                top: 25%;
+                left: 90%;
+                transform: translateX(-50%)
+            }   
+
+            #md{
+                height: 90px;
+                top: 10px;
+                left: 25px;
+            }
+
+            #m {
+               height: 90px;
+               top: 13px;  
+               right: 10px;
+            }
+            
+           .buttons-container button {
+                width: 49%; /* Кнопки занимают всю ширину */
+                font-size: 15px;
+                height: 45px;
+                }
+        }
+
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 45px;
+                top: 25%;
+                left: 95%;
+                transform: translateX(-50%);
+            
+            } 
+             .buttons-container {
+                width: 101%;
+                
+            }
+        }
+
+        @media (max-width: 340px) {
+            h1 {
+                font-size: 40px;
+                top: 30%;
+                top: 30%;
+                left: 90%;
+                transform: translateX(-50%);
+            } 
+             .buttons-container {
+                width: 100%;
+                
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <img src="https://images.unsplash.com/photo-1516054575922-f0b8eeadec1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="header-image" alt="Imagine sat Hagimus">
+        
+        <img src="cartinki/gerb.png" id="md" alt="Stema Hagimus">
+        <img src="cartinki/gerb.png" id="m" alt="Stema Hagimus">
+        
+        <h1>Proiecte</h1>
+        
+        <div class="buttons-container">
+            <button id='c'><i class="fas fa-home"></i> Acasă</button>
+            <button id='d'><i class="fas fa-user-tie"></i> Primarul</button>
+            <button id='e'><i class="fas fa-lightbulb"></i> Proiecte</button>
+            <button id='f'><i class="fas fa-city"></i> Satul</button>
+            <button id='g'><i class="fas fa-images"></i> Fotografii</button>
+            <button id='h'><i class="fas fa-address-book"></i> Contacte</button>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h2><i class="fas fa-project-diagram"></i> Proiecte realizate în Hagimus</h2>
+        <p class="intro-text">
+           Suntem mândri că, prin eforturi comune și finanțare publică, comuna Hagimus a transformat și modernizat infrastructura locală:
+        </p>
+
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="https://www.studio-l.online/wp-content/uploads/2024/04/Snimok-ekrana-210.png" alt="Parc">
+                <div class="project-info">
+                    <h3> Amenajarea Parcului „Expres” (august–septembrie 2023)</h3>
+                    <p>Parcul a fost amenajat pe locul fostei școli, cu sprijin din programul național „Satul European Expres” și fonduri locale. Au fost instalate 50 de bănci, foișoare, locuri de joacă și iluminat. Buget: ~230 000 MDL.</p>
+                    <a href="https://www.studio-l.online/actualitate/video-o-femeie-din-satul-hagimus-mobilizat-tot-satul-pentru-amenaja-un-parc/" target="_blank" class="read-more">Află mai multe</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="cartinki/clipboard_image_69d51b79a76ed60b09167f1c1f4faad9.png" alt="Izvor">
+                <div class="project-info">
+                    <h3><i class="fas fa-fountain"></i> Restaurarea zonei de agrement lângă izvorul „Ioan Vodă” (iulie–septembrie 2024)</h3>
+                    <p>Prin colaborarea cu „Hagimus Cetățeni Activi” și cu sprijin ONU, a fost reamenajată o zonă recreativă cu foișoare, bănci și iluminat ecologic. Proiectul vizează incluziunea socială și promovarea turismului rural.</p>
+                    <a href="https://primariahagimus.md/2024/07/29/restaurarea-zonei-de-agrement-din-preajma-izvorului-ioan-voda-din-satul-hagimus/" target="_blank" class="read-more">Află mai multe</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="cartinki/изображение_viber_2025-07-13_18-30-14-952.jpg" alt="Gădinița">
+                <div class="project-info">
+                    <h3> Renovarea terenului sportiv la Grădinița „Grigore Vieru” (septembrie–octombrie 2024)</h3>
+                    <p>A fost modernizat terenul de joacă din curtea grădiniței, cu plăci de cauciuc și suprafețe adaptate pentru activități sportive ale copiilor. Buget estimat: ~737 024 MDL. </p>
+                    <a href="https://www.studio-l.online/actualitate/video-o-femeie-din-satul-hagimus-mobilizat-tot-satul-pentru-amenaja-un-parc/" target="_blank" class="read-more">Află mai multe</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="https://scontent.fkiv1-1.fna.fbcdn.net/v/t39.30808-6/487195850_1158387002968081_5447660321133011664_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_ohc=otz4On70S7YQ7kNvwF24ONT&_nc_oc=Adk7migFS9xbT4Jx4Z3UUAXnDsCcpIFnC7NJ4_XEoSQdHYsZIjQLdIf_7SS4oEXaCx4&_nc_zt=23&_nc_ht=scontent.fkiv1-1.fna&_nc_gid=AtMY3I64WuiteitNna_gnw&oh=00_AfTU6m1CiktPl7ojuZJNB4zha5J5lfMZicOEuRvHwGlyqQ&oe=68794CDE" alt="Grădinița(interior)">
+                <div class="project-info">
+                    <h3>Reparații interioare la IET „Grigore Vieru” (mai–iunie 2025)</h3>
+                    <p>Primăria a lansat licitație pentru modernizarea tâmplăriei, finisajelor și infrastructurii interioare la școala locală, cu un buget de ~154 988 MDL. </p>
+                    <a href="https://esp.md/ro/podrobnosti/2024/04/30/parc-expres-amenajat-locul-fostei-scoli" target="_blank" class="read-more">Află mai multe</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Satul Hagimus. Acest site este un proiect personal și nu reprezintă oficial Primăria. Toate drepturile rezervate.</p>
+
+            
+            <p>Adresă: Strada Ștefan cel Mare și Sfânt 138,s. Hagimus,<br>
+                 raionul Căușeni, Republica Moldova </p>
+        
+        </div>
+    </footer>
+
+    <script>
+        // Efect de paralaxă îmbunătățit
+        document.addEventListener('scroll', function() {
+            const headerImage = document.querySelector('.header-image');
+            const scrollPosition = window.pageYOffset;
+            headerImage.style.transform = 'translateY(' + scrollPosition * 0.5 + 'px)';
+        });
+
+        // Navigare butoane
+        document.getElementById("c").addEventListener("click", function() {
+            window.location.href = "hag.html";
+        });
+        document.getElementById("d").addEventListener("click", function() {
+            window.location.href = "Prim.html";
+        });
+        document.getElementById("e").addEventListener("click", function() {
+            window.location.href = "proiecte.html";
+        });
+        document.getElementById("f").addEventListener("click", function() {
+            window.location.href = "satul.html";
+        });
+        document.getElementById("g").addEventListener("click", function() {
+            window.location.href = "galer.html";
+        });
+        document.getElementById("h").addEventListener("click", function() {
+            window.location.href = "cont.html";
+        });
+    </script>
+</body>
+</html>

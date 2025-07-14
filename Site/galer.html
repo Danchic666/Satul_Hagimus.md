@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie Foto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #003380;
+            --secondary-blue: #00509e;
+            --accent-gold: #d4af37;
+            --light-bg: #f5f9ff;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .header-container {
+            width: 100%;
+            height: 320px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .header-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            z-index: 1;
+            filter: grayscale(30%) brightness(80%);
+        }
+
+        #md, #m {
+            height: 180px;
+            width: auto;
+            position: absolute;
+            top: 50px;
+            z-index: 3;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8));
+            transition: var(--transition);
+        }
+        
+        #md {
+            left: 80px;
+        }
+        
+        #m {
+            right: 80px;
+        }
+
+        #md:hover, #m:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 100px;
+            color: var(--text-light);
+            margin: 0;
+            position: absolute;
+            left: 50%;
+            top: 80px;
+            transform: translateX(-50%);
+            z-index: 3;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            z-index: 4;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .buttons-container button {
+            background-color: var(--primary-blue);
+            height: 55px;
+            width: 170px;
+            color: var(--text-light);
+            font-size: 19px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 4px solid var(--accent-gold);
+            font-weight: 600;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .buttons-container button:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .gallery-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .gallery-section h2 {
+            color: var(--primary-blue);
+            font-size: 38px;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .gallery-section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--accent-gold);
+            border-radius: 2px;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding-bottom: 50px;
+        }
+
+        .image-grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 3px solid var(--primary-blue);
+        }
+
+        .image-grid img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent-gold);
+        }
+
+        footer {
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+       
+
+        @media (max-width: 1360px) {
+            #m {
+            margin-left: 5%;
+            }
+
+            #md{
+            margin-right: 5%;
+            }
+
+            h1{
+                font-size:70px ;
+            }
+        }
+
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 70px;
+                top: 70px;
+            }
+
+            #md{
+                height: 200px;
+                top: 40px;
+                left: 5%;
+            }
+
+            #m{
+                height: 200px;
+                top: 40px;
+                right: 5%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 48px;
+                top: 35%;
+                transform: translateX(0);
+                margin-left: -43%;
+            }
+            
+            #md, #m {
+                height: 100px;
+                top: 20px;
+            }
+            
+            #md {
+                left: 10px;
+            }
+            
+            #m {
+                right: 10px;
+            }
+            
+            .buttons-container {
+                top: auto;
+                bottom: 10px;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+            
+            .buttons-container button {
+                width: 140px;
+                font-size: 16px;
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 40px;
+                top: 85px;
+                left: 95%;
+                transform: translateX(-50%);
+            }   
+
+            #md{
+                height: 90px;
+                top: 10px;
+                left: 25px;
+            }
+
+            #m {
+               height: 90px;
+               top: 13px;  
+               right: 10px;
+            }
+            
+            .buttons-container button {
+                width: 49%;
+                font-size: 15px;
+                height: 45px;
+            }
+        }
+
+         @media (max-width: 380px) {
+            h1 {
+                font-size: 35px;
+                top: 30%;
+                left: 95%;
+                transform: translateX(-50%);
+            } 
+
+             .buttons-container {
+                width: 101%;
+                
+            }
+        }
+
+        @media (max-width: 340px) {
+            h1 {
+                font-size: 30px;
+                top: 34%;
+                left: 95%;
+                transform: translateX(-50%);
+             
+            } 
+
+             .buttons-container {
+                width: 100%;
+            
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <img src="https://images.unsplash.com/photo-1516054575922-f0b8eeadec1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="header-image" alt="Imagine sat Hagimus">
+        
+        <img src="cartinki/gerb.png" id="md" alt="Stema Hagimus">
+        <img src="cartinki/gerb.png" id="m" alt="Stema Hagimus">
+        
+        <h1>Fotografiile satului</h1>
+        
+        <div class="buttons-container">
+            <button id='c'><i class="fas fa-home"></i> Acasă</button>
+            <button id='d'><i class="fas fa-user-tie"></i> Primarul</button>
+            <button id='e'><i class="fas fa-lightbulb"></i> Proiecte</button>
+            <button id='f'><i class="fas fa-city"></i> Satul</button>
+            <button id='g'><i class="fas fa-images"></i> Fotografii</button>
+            <button id='h'><i class="fas fa-address-book"></i> Contacte</button>
+        </div>
+    </div>
+
+    <div class="gallery-section">
+        <h2><i class="fas fa-camera-retro"></i> Imagini din Hagimus <br>
+         (pe care nu le găsiți pe internet) </h2>
+        
+        <div class="image-grid">
+            <img src="cartinki/1.jpg" alt="Imagine 1">
+            <img src="cartinki/2.jpg" alt="Imagine 2">
+            <img src="cartinki/3.jpg" alt="Imagine 3">
+            <img src="cartinki/5.jpg" alt="Imagine 5">
+            <img src="cartinki/6.jpg" alt="Imagine 6">
+            <img src="cartinki/7.jpg" alt="Imagine 7">
+            <img src="cartinki/8.jpg" alt="Imagine 8">
+            <img src="cartinki/9.jpg" alt="Imagine 9">
+            <img src="cartinki/10.jpg" alt="Imagine 10">
+            <img src="cartinki/11.jpg" alt="Imagine 11">
+            <img src="cartinki/12.jpg" alt="Imagine 12">
+            <img src="cartinki/13.jpg" alt="Imagine 13">
+            <img src="cartinki/14.jpg" alt="Imagine 14">
+            <img src="cartinki/15.jpg" alt="Imagine 15">
+            <img src="cartinki/16.jpg" alt="Imagine 16">
+            <img src="cartinki/17.jpg" alt="Imagine 17">
+            <img src="cartinki/18.jpg" alt="Imagine 18">
+            <img src="cartinki/19.jpg" alt="Imagine 19">
+            <img src="cartinki/20.jpg" alt="Imagine 20">
+            <img src="cartinki/21.jpg" alt="Imagine 21">
+            <img src="cartinki/22.jpg" alt="Imagine 22">
+            <img src="cartinki/23.jpg" alt="Imagine 23">
+            <img src="cartinki/24.jpg" alt="Imagine 24">
+            <img src="cartinki/25.jpg" alt="Imagine 25">
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+             <p>&copy; 2025 Satul Hagimus. Acest site este un proiect personal și nu reprezintă oficial Primăria. Toate drepturile rezervate.</p>
+
+            
+            <p>Adresă: Strada Ștefan cel Mare și Sfânt 138,s. Hagimus,<br>
+                 raionul Căușeni, Republica Moldova </p>
+          
+        </div>
+    </footer>
+
+    <script>
+        // Efect de paralaxă îmbunătățit
+        document.addEventListener('scroll', function() {
+            const headerImage = document.querySelector('.header-image');
+            const scrollPosition = window.pageYOffset;
+            headerImage.style.transform = 'translateY(' + scrollPosition * 0.5 + 'px)';
+        });
+
+        // Navigare butoane
+        document.getElementById("c").addEventListener("click", function() {
+            window.location.href = "hag.html";
+        });
+        document.getElementById("d").addEventListener("click", function() {
+            window.location.href = "Prim.html";
+        });
+        document.getElementById("e").addEventListener("click", function() {
+            window.location.href = "proiecte.html";
+        });
+        document.getElementById("f").addEventListener("click", function() {
+            window.location.href = "satul.html";
+        });
+        document.getElementById("g").addEventListener("click", function() {
+            window.location.href = "galer.html"; 
+        });
+        document.getElementById("h").addEventListener("click", function() {
+            window.location.href = "cont.html";
+        });
+    </script>
+</body>
+</html>

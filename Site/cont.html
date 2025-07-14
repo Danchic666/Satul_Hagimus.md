@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Contacte</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        :root {
+            --primary-blue: #003380;
+            --secondary-blue: #00509e;
+            --accent-gold: #d4af37;
+            --light-bg: #f5f9ff;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            margin: 0; padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .header-container {
+            width: 100%; height: 320px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            position: relative; z-index: 2;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .header-image {
+            position: absolute;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            z-index: 1;
+            filter: grayscale(30%) brightness(80%);
+        }
+
+        #md, #m {
+            height: 180px; width: auto;
+            position: absolute;
+            top: 50px;
+            z-index: 3;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8));
+            transition: var(--transition);
+        }
+        
+        #md { left: 80px; }
+        #m { right: 80px; }
+
+        #md:hover, #m:hover { transform: scale(1.05); }
+
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 100px;
+            color: var(--text-light);
+            margin: 0;
+            position: absolute;
+            left: 50%;
+            top: 80px;
+            transform: translateX(-50%);
+            z-index: 3;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            z-index: 4;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .buttons-container button {
+            background-color: var(--primary-blue);
+            height: 55px;
+            width: 170px;
+            color: var(--text-light);
+            font-size: 19px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 4px solid var(--accent-gold);
+            font-weight: 600;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .buttons-container button:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .contact-container {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .contact-section {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: var(--box-shadow);
+            border-top: 5px solid var(--accent-gold);
+        }
+
+        .contact-section h2 {
+            color: var(--primary-blue);
+            font-size: 38px;
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            position: relative;
+        }
+
+        .contact-section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--accent-gold);
+            border-radius: 2px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .contact-grid.main-info {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            justify-content: center;
+        }
+        
+        .contact-grid.main-info .contact-card {
+            margin: 0 auto;
+            float: none;
+        }
+
+        .contact-card {
+            background: var(--light-bg);
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 5px solid var(--primary-blue);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-card h3 {
+            color: var(--primary-blue);
+            margin-top: 0;
+            font-size: 24px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-card h3 i {
+            color: var(--accent-gold);
+            font-size: 28px;
+        }
+
+        .contact-info p {
+            margin: 8px 0;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-info p i {
+            color: var(--secondary-blue);
+            font-size: 18px;
+        }
+
+        .contact-info strong {
+            color: var(--secondary-blue);
+        }
+
+        .map-container {
+            margin-top: 40px;
+            height: 450px;
+            background: #0e5296;
+            border-radius: 10px;
+            overflow: hidden;
+            color: #ffc400;
+            font-size: 15px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        .map-container h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+            padding-top: 15px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        footer {
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        
+
+        @media (max-width: 992px) {
+            h1 { font-size: 60px; top: 70px; }
+            #md, #m { height: 150px; top: 40px; }
+            .buttons-container button { width: 150px; font-size: 17px; height: 50px; }
+            .contact-section h2 { font-size: 32px; }
+            .contact-card h3 { font-size: 20px; }
+            .contact-info p { font-size: 16px; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 48px;
+                top: 60px;
+                text-align: center;
+                position: relative;
+                transform: translateX(0);
+                width: 100%;
+            }
+            #md, #m { height: 100px; top: 20px; }
+            #md { left: 10px; }
+            #m { right: 10px; }
+            .buttons-container {
+                top: auto;
+                bottom: 10px;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+            .buttons-container button {
+                width: 140px;
+                font-size: 16px;
+                height: 50px;
+            }
+            .contact-container { padding: 0 15px; margin: 30px auto; }
+            .contact-section { padding: 30px; }
+            .map-container { height: 350px; }
+            .contact-grid.main-info { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 50px;
+                top: 85px;
+                transform: translateX(-50%);
+            }
+            #md{
+                height: 90px;
+                top: 10px;
+                left: 25px;
+            }
+            #m {
+               height: 90px;
+               top: 13px;  
+               right: 10px;
+            }
+            .buttons-container button {
+                width: 49%;
+                font-size: 15px;
+                height: 45px;
+            }
+            .contact-section h2 {
+                font-size: 28px;
+            }
+            .contact-card { padding: 20px; }
+            .contact-card h3 { font-size: 20px; }
+            .contact-info p { font-size: 15px; }
+            .map-container { height: 300px; }
+        }
+
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 45px;
+                top: 25%;
+                transform: translateX(-50%);
+            } 
+        }
+
+        @media (max-width: 340px) {
+            h1 {
+                font-size: 40px;
+                top: 30%;
+                transform: translateX(-50%);
+            } 
+        }
+    </style>
+</head>
+<body>
+     <div class="header-container">
+        <img src="https://images.unsplash.com/photo-1516054575922-f0b8eeadec1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="header-image" alt="Imagine sat Hagimus" />
+        
+        <img src="cartinki/gerb.png" id="md" alt="Stema Hagimus" />
+        <img src="cartinki/gerb.png" id="m" alt="Stema Hagimus" />
+        
+        <h1>Contacte</h1>
+        
+        <div class="buttons-container">
+            <button id='c'><i class="fas fa-home"></i> Acasă</button>
+            <button id='d'><i class="fas fa-user-tie"></i> Primarul</button>
+            <button id='e'><i class="fas fa-lightbulb"></i> Proiecte</button>
+            <button id='f'><i class="fas fa-city"></i> Satul</button>
+            <button id='g'><i class="fas fa-images"></i> Fotografii</button>
+            <button id='h'><i class="fas fa-address-book"></i> Contacte</button>
+        </div>
+    </div>
+
+    <div class="contact-container">
+        <div class="contact-section">
+            <h2><i class="fas fa-info-circle"></i> Date de contact</h2>
+            
+            <div class="contact-grid main-info">
+                <div class="contact-card">
+                    <h3><i class="fas fa-building"></i> Primăria Hagimus</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> <strong>Adresă:</strong> Strada Ștefan cel Mare și Sfânt 138, s. Hagimus, raionul Căușeni, Republica Moldova</p>
+                        <p><i class="fas fa-mail-bulk"></i> <strong>Cod poștal:</strong> MD‑4319</p>
+                        <p><i class="fas fa-globe"></i> <strong>Raionul:</strong> Căușeni</p> 
+                    </div>
+                </div>
+                
+                <div class="contact-card">
+                    <h3><i class="fas fa-clock"></i> Program de lucru</h3>
+                    <div class="contact-info">
+                        <p><i class="far fa-calendar-alt"></i> <strong>Luni - Vineri:</strong> 8:00 - 17:00 (12:00-13:00 pauză)</p>
+                        <p><i class="far fa-calendar-times"></i> <strong>Sâmbătă-Duminică:</strong> Închis</p>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <h3><i class="fas fa-phone-alt"></i> Contacte telefonice</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-fax"></i> <strong>Primar:</strong> 	0‑242‑(‑)35236 (+ primar 58221 din cod local)</p> 
+                        <p><i class="fas fa-phone-square"></i> <strong>Secretar consiliu sătesc:</strong>  0‑242‑(‑)35238</p> 
+                        <p><i class="fas fa-phone-square-alt"></i> <strong>Contabil (birou contabilitate):</strong> 0‑242‑(‑)35274</p> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="map-container">
+            <h2><i class="fas fa-map-marked-alt"></i> Satul Hagimus pe Hartă</h2>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10887.893893321523!2d29.5085375!3d46.7410049!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c950a24128f73b%3A0x640b63e8006d6493!2sHagimus%2C%20Moldova!5e0!3m2!1sen!2sro!4v1719261763124!5m2!1sen!2sro" 
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Satul Hagimus. Acest site este un proiect personal și nu reprezintă oficial Primăria. Toate drepturile rezervate.</p>
+            <p>Adresă: s. Hagimus, raionul Căușeni, Republica Moldova</p>
+          
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('scroll', function() {
+            const headerImage = document.querySelector('.header-image');
+            const scrollPosition = window.pageYOffset;
+            headerImage.style.transform = 'translateY(' + scrollPosition * 0.5 + 'px)';
+        });
+
+        document.getElementById("c").addEventListener("click", function() {
+            window.location.href = "hag.html";
+        });
+        document.getElementById("d").addEventListener("click", function() {
+            window.location.href = "Prim.html";
+        });
+        document.getElementById("e").addEventListener("click", function() {
+            window.location.href = "proiecte.html";
+        });
+        document.getElementById("f").addEventListener("click", function() {
+            window.location.href = "satul.html";
+        });
+        document.getElementById("g").addEventListener("click", function() {
+            window.location.href = "galer.html";
+        });
+        document.getElementById("h").addEventListener("click", function() {
+            window.location.href = "cont.html";
+        });
+    </script>
+</body>
+</html>

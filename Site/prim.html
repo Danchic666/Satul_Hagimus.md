@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Despre primar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #003380;
+            --secondary-blue: #00509e;
+            --accent-gold: #d4af37;
+            --light-bg: #f5f9ff;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden; /* Предотвращает горизонтальную прокрутку */
+        }
+
+        .header-container {
+            width: 100%;
+            height: 320px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .header-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            z-index: 1;
+            transform: translateZ(-1px) scale(2);
+            filter: grayscale(30%) brightness(80%);
+            transition: transform 0.1s ease-out;
+        }
+
+        #md, #m {
+            height: 180px;
+            width: auto;
+            position: absolute;
+            top: 50px;
+            z-index: 3;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8));
+            transition: var(--transition);
+        }
+        
+        #md {
+            left: 80px;
+        }
+        
+        #m {
+            right: 80px;
+        }
+
+        #md:hover, #m:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 100px;
+            color: var(--text-light);
+            margin: 0;
+            position: absolute;
+            left: 50%;
+            top: 90px;
+            transform: translateX(-50%);
+            z-index: 3;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            z-index: 4;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .buttons-container button {
+            background-color: var(--primary-blue);
+            height: 55px;
+            width: 170px;
+            color: var(--text-light);
+            font-size: 19px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 4px solid var(--accent-gold);
+            font-weight: 600;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .buttons-container button:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .official-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 35px;
+            box-shadow: var(--box-shadow);
+            border-top: 5px solid var(--accent-gold);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .official-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .official-card h2 {
+            color: var(--primary-blue);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-top: 0;
+            font-weight: 700;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mayor-profile {
+            display: flex;
+            flex-wrap: wrap; /* Позволяет элементам переноситься на новую строку */
+            gap: 40px; /* Увеличим расстояние между блоками */
+            margin-top: 40px;
+            align-items: flex-start; /* Выравнивание по верху */
+        }
+
+        h3{
+            font-size: 25px;
+        }
+
+       
+
+        .mayor-photo-wrapper {
+            flex: 1; /* Позволяет блоку растягиваться */
+            min-width: 300px; /* Минимальная ширина, чтобы фото не становилось слишком маленьким */
+            max-width: 400px; /* Максимальная ширина для фото */
+            position: relative;
+            box-sizing: border-box; /* Учитываем padding и border в ширине */
+            /* Добавляем отступ сверху, чтобы опустить картинку */
+            margin-top: 40px; /* 40px = 4cm (примерно) */
+        }
+
+        .mayor-photo {
+            width: 90%;
+            height: auto;
+            display: block;
+            border-radius: 10px; /* Закругленные углы */
+            border: 6px solid var(--primary-blue); /* Толстая синяя рамка */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Красивая тень */
+            transition: transform 0.3s ease-in-out;
+            margin-left: -3% ;
+            margin-top: -30px;
+        }
+
+        .mayor-photo:hover {
+            transform: scale(1.02); /* Немного увеличим при наведении */
+        }
+
+        .mayor-details {
+            flex: 2; /* Позволяет блоку с деталями занимать больше места */
+            min-width: 250px; /* Минимальная ширина для текста */
+        }
+
+        .mayor-details h2 {
+            font-size: 30px; /* Увеличенный размер имени */
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            border-bottom: none; /* Убираем нижнюю границу */
+            padding-bottom: 0;
+            
+        }
+
+        .mayor-details .title {
+            font-size: 30px; /* Размер должности */
+            color: var(--secondary-blue);
+            font-weight: 600;
+            margin-bottom: 25px;
+            font-weight: 600;
+            display: block;
+        }
+
+        .mayor-details p {
+            font-size: 17px; /* Немного увеличен размер текста */
+            margin-bottom: 18px;
+            text-align: justify;
+            color: var(--text-dark);
+        }
+
+        .achievements-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 25px;
+    }
+
+        .achievements-list li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 30px;
+            font-size: 17px;
+            color: var(--text-dark);
+        }
+
+        .achievements-list li:before {
+            content: "\f00c"; /* Иконка Font Awesome (check) */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--accent-gold);
+            font-size: 16px;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        /* Блок цитаты удален */
+
+        footer {
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            box-shadow: 0 -4px 12px rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+       
+       @media (max-width: 1360px) {
+            #m {
+            margin-left: 5%;
+            }
+
+            #md{
+            margin-right: 5%;
+            }
+
+            h1{
+                font-size:70px ;
+            }
+        }
+
+
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 70px;
+                top: 70px;
+            }
+
+            #md{
+                height: 200px;
+                top: 40px;
+                left: 5%;
+            }
+
+            #m{
+                height: 200px;
+                top: 40px;
+                right: 5%;
+            }
+
+
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 48px;
+                top: 35%;
+                transform: translateX(0);
+                margin-left: -43%;
+            }
+            
+            #md, #m {
+                height: 100px; /* Уменьшен размер гербов */
+                top: 20px;
+            }
+            
+            #md {
+                left: 10px;
+            }
+            
+            #m {
+                right: 10px;
+            }
+            
+            .buttons-container {
+                top: auto;
+                bottom: 10px; /* Ниже кнопок */
+                flex-wrap: wrap; /* Перенос кнопок на новую строку */
+                gap: 5px; /* Уменьшен зазор */
+                margin-top: 700px;}
+            
+            .buttons-container button {
+                width: 140px; /* Уменьшена ширина кнопок */
+                font-size: 16px;
+                height: 50px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr; /* Одна колонка на мобильных */
+            }
+
+            .official-card {
+                padding: 20px;
+                margin-bottom: 25px;
+            }
+
+            .official-card h2 {
+                font-size: 24px;
+                padding-bottom: 10px;
+            }
+
+            .footer-links {
+                flex-direction: column; /* Ссылки в подвале будут вертикальными */
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 50px;
+                top: 25%;
+                left: 95%;
+                transform: translateX(-50%);
+            
+            }   
+
+
+            #md{
+                height: 90px;
+                top: 10px;
+                left: 25px;
+                right: 5px;
+            }
+
+            #m {
+               height: 90px;
+               top: 13px;  
+               margin-right: 7px;
+            }
+            
+            .buttons-container button {
+                width: 33%; /* Кнопки занимают всю ширину */
+                font-size: 15px;
+                height: 45px;
+                }
+        }
+
+ .header-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            z-index: 1;
+            transform: translateZ(-1px) scale(2);
+            filter: grayscale(30%) brightness(80%);
+            transition: transform 0.1s ease-out;
+        }
+
+        .buttons-container {
+                width: 150%;
+                left: -25%;
+            }
+
+         @media (max-width: 380px) {
+            h1 {
+                font-size: 45px;
+                top: 25%;
+                left: 95%;
+                transform: translateX(-50%);
+            } 
+
+            .buttons-container {
+                width: 150%;
+                left: -25%;
+            }
+            
+            
+        }
+
+ @media (max-width: 340px) {
+            h1 {
+                font-size: 45px;
+                top: 28%;
+                left: 93%;
+                transform: translateX(-50%);
+
+            } 
+
+            .buttons-container {
+                width: 150%;
+                left: -25%;
+            }
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <img src="https://images.unsplash.com/photo-1516054575922-f0b8eeadec1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="header-image" alt="Imagine sat Hagimus">
+        
+        <img src="cartinki/gerb.png" id="md" alt="Stema Hagimus">
+        <img src="cartinki/gerb.png" id="m" alt="Stema Hagimus">
+        
+        <h1>Primarul</h1>
+        
+        <div class="buttons-container">
+            <button id='c'><i class="fas fa-home"></i> Acasă</button>
+            <button id='d'><i class="fas fa-user-tie"></i> Primarul</button>
+            <button id='e'><i class="fas fa-lightbulb"></i> Proiecte</button>
+            <button id='f'><i class="fas fa-city"></i> Satul</button>
+            <button id='g'><i class="fas fa-images"></i> Fotografii</button>
+            <button id='h'><i class="fas fa-address-book"></i> Contacte</button>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <div class="official-card">
+            <div class="mayor-profile">
+                <div class="mayor-photo-wrapper">
+                    <img src="img/mmm.png" class="mayor-photo" alt="Primarul Hagimus">
+                </div>
+                
+                <div class="mayor-details">
+                    <h2>Cucerovschi Veaceslav</h2>
+                    <span class="title">Primar al satului Hagimus</span>
+                    
+                    <p>A fost ales primar în ALEGERI LOCALE NOI din 29 mai 2022, candidând din partea PLDM, obținând 530 de voturi (59,02 %), față de ceilalți 4 candidați .</p>
+                    
+                     
+                    <h3><i class="fas fa-medal"></i>  Roluri și activități în primărie <br>
+                    Conform platformei de achiziții publice:</h3>
+                    <ul class="achievements-list">
+                        <li>Achiziții de materiale didactice – februarie 2025 <br>
+                        Primăria Hagimus a cumpărat materiale didactice pentru școală și grădiniță, pentru a sprijini procesul educațional.
+                        </li>
+                        <li>Produse alimentare – iunie 2025 <br>
+                            Au fost procurate alimente pentru cantinele instituțiilor de învățământ din sat (grădiniță și școală).
+                        </li>
+                        <li>Servicii de agrement – iunie 2025 <br>
+                        Primăria a contractat servicii pentru organizarea de activități distractive și educative pentru copii și tineri.
+                        </li>
+                        <li>Amenajarea unui parc – august–septembrie 2023 <br>
+                        A fost amenajat un parc modern pe locul fostei școli, cu bănci, copaci și loc de joacă pentru copii.
+
+                    </ul>
+                </div>
+            </div>
+            </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Satul Hagimus. Acest site este un proiect personal și nu reprezintă oficial Primăria. Toate drepturile rezervate.</p>
+
+            
+            <p>Adresă: Strada Ștefan cel Mare și Sfânt 138,s. Hagimus,<br>
+                 raionul Căușeni, Republica Moldova </p>
+         
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript для параллакс-эффекта
+        document.addEventListener('scroll', function() {
+            const headerImage = document.querySelector('.header-image');
+            const scrollPosition = window.pageYOffset;
+            // Уменьшаем множитель, чтобы параллакс был менее выраженным и более плавным
+            headerImage.style.transform = 'translateY(' + scrollPosition * 0.3 + 'px) scale(2) translateZ(-1px)';
+        });
+
+        // Обработчики событий для кнопок
+        document.getElementById("c").addEventListener("click", function() {
+            window.location.href = "hag.html";
+        });
+        document.getElementById("d").addEventListener("click", function() {
+            window.location.href = "Prim.html";
+        });
+        document.getElementById("e").addEventListener("click", function() {
+            window.location.href = "proiecte.html";
+        });
+        document.getElementById("f").addEventListener("click", function() {
+            window.location.href = "satul.html";
+        });
+        document.getElementById("g").addEventListener("click", function() {
+            window.location.href = "galer.html";
+        });
+        document.getElementById("h").addEventListener("click", function() {
+            window.location.href = "cont.html";
+        });
+    </script>
+</body>
+</html>

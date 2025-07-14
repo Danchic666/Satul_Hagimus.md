@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satul.Hagimus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #003380;
+            --secondary-blue: #00509e;
+            --accent-gold: #d4af37;
+            --light-bg: #f5f9ff;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden; /* Предотвращает горизонтальную прокрутку */
+        }
+
+        .header-container {
+            width: 100%;
+            height: 320px; /* Увеличена высота для лучшего вида изображения */
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            position: relative;
+            z-index: 2;
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .header-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Изображение будет покрывать всю область */
+            opacity: 0.25; /* Немного увеличена прозрачность для лучшей видимости текста */
+            z-index: 1;
+            /* Добавляем параллакс-эффект */
+            transform: translateZ(-1px) scale(2); /* Для параллакса */
+            filter: grayscale(30%) brightness(80%); /* Добавим легкий фильтр */
+            transition: transform 0.1s ease-out; /* Плавный переход при прокрутке */
+        }
+
+        #md, #m {
+            height: 180px;
+            width: auto;
+            position: absolute;
+            top: 50px;
+            z-index: 3;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8)); /* Усиленная тень */
+            transition: var(--transition);
+        }
+        
+        #md {
+            left: 80px;
+        }
+        
+        #m {
+            right: 80px;
+        }
+
+        #md:hover, #m:hover {
+            transform: scale(1.05); /* Эффект увеличения при наведении */
+        }
+
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 100px;
+            color: var(--text-light);
+            margin: 0;
+            position: absolute;
+            left: 50%;
+            top: 80px;
+            transform: translateX(-50%);
+            z-index: 3;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px; /* Увеличен зазор между кнопками */
+            position: absolute;
+            bottom: 20px; /* Позиционирование кнопок внизу заголовка */
+            width: 100%;
+            z-index: 4;
+            padding: 0 10px; /* Небольшой отступ по бокам */
+            box-sizing: border-box; /* Учитываем padding в ширине */
+        }
+
+        .buttons-container button {
+            background-color: var(--primary-blue);
+            height: 55px; /* Увеличена высота кнопок */
+            width: 170px; /* Увеличена ширина кнопок */
+            color: var(--text-light);
+            font-size: 19px; /* Увеличен размер шрифта */
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 4px solid var(--accent-gold); /* Усиленная нижняя граница */
+            font-weight: 600; /* Более жирный текст */
+            border-radius: 5px; /* Немного закругленные углы */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px; /* Пространство между иконкой и текстом */
+        }
+
+        .buttons-container button:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-3px) scale(1.02); /* Более выраженный эффект */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25); /* Усиленная тень */
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .official-card {
+            background: rgb(255, 255, 255);
+            border-radius: 10px; /* Немного более закругленные углы */
+            padding: 30px;
+            margin-bottom: 35px; /* Увеличен нижний отступ */
+            box-shadow: var(--box-shadow);
+            border-top: 5px solid var(--accent-gold); /* Более выраженная верхняя граница */
+            transition: var(--transition);
+            position: relative; /* Для возможного добавления элементов */
+        }
+
+        .official-card:hover {
+            transform: translateY(-15px); /* Более выраженный эффект поднятия */
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); /* Усиленная тень */
+            
+        }
+
+        .official-card h2 {
+            color: var(--primary-blue);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px; /* Увеличен отступ снизу */
+            margin-top: 0;
+            font-weight: 700; /* Очень жирный текст */
+            font-size: 28px; /* Увеличен размер заголовка */
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Пространство между иконкой и текстом */
+            
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Немного увеличен минимальный размер колонки */
+            gap: 25px; /* Увеличен зазор */
+            margin-top: 40px;
+        }
+
+        .news-item {
+            margin-bottom: 20px; /* Увеличен нижний отступ */
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #ddd; /* Более светлая пунктирная линия */
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-date {
+            font-weight: bold;
+            color: var(--secondary-blue);
+            font-size: 15px; /* Уменьшен размер шрифта для даты */
+            margin-bottom: 5px;
+            display: block; /* Чтобы дата была на своей строке */
+        }
+
+  
+
+      
+
+        .service-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 15px;
+        }
+
+        .service-list li {
+            padding: 10px 0; /* Увеличен отступ */
+            position: relative;
+            padding-left: 30px; /* Увеличен отступ для иконок */
+            border-bottom: 1px dotted #eee; /* Пунктирная граница между пунктами */
+        }
+        
+        .service-list li:last-child {
+            border-bottom: none;
+        }
+
+        .service-list li:before {
+            content: "\f058"; /* Иконка Font Awesome (например, check-circle) */
+            font-family: "Font Awesome 6 Free"; /* Указываем семейство шрифтов для Font Awesome 6 */
+            font-weight: 900; /* Для Solid иконок */
+            color: var(--accent-gold);
+            font-size: 18px; /* Немного меньше, чем маркер */
+            position: absolute;
+            left: 0;
+            top: 50%; /* Выравнивание по центру */
+            transform: translateY(-50%); /* Точное выравнивание */
+        }
+
+        footer {
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1); /* Тень сверху */
+        }
+
+        .footer-content {
+            max-width: 960px; /* Увеличение ширины контента в подвале */
+            margin: 0 auto;
+        }
+
+     
+  
+
+        
+
+        .social-icons {
+            display: flex;
+            gap: 20px; /* Увеличен зазор между иконками */
+            margin-top: 15px;
+            justify-content: center;
+        }
+
+        .social-icons a {
+            color: var(--text-light);
+            font-size: 28px; /* Увеличен размер иконок */
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-gold);
+            transform: scale(1.1); /* Эффект увеличения */
+        }
+
+        @media (max-width: 1360px) {
+            #m {
+            margin-left: 5%;
+            }
+
+            #md{
+            margin-right: 5%;
+            }
+
+            h1{
+                font-size:70px ;
+            }
+        }
+
+
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 70px;
+                top: 70px;
+            }
+
+            #md{
+                height: 200px;
+                top: 40px;
+                left: 5%;
+            }
+
+            #m{
+                height: 200px;
+                top: 40px;
+                right: 5%;
+            }
+
+
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 48px;
+                top: 35%;
+                transform: translateX(0);
+                margin-left: -43%;
+            }
+            
+            #md, #m {
+                height: 100px; /* Уменьшен размер гербов */
+                top: 20px;
+            }
+            
+            #md {
+                left: 10px;
+            }
+            
+            #m {
+                right: 10px;
+            }
+            
+            .buttons-container {
+                top: auto;
+                bottom: 10px; /* Ниже кнопок */
+                flex-wrap: wrap; /* Перенос кнопок на новую строку */
+                gap: 5px; /* Уменьшен зазор */
+                margin-top: 700px;}
+            
+            .buttons-container button {
+                width: 140px; /* Уменьшена ширина кнопок */
+                font-size: 16px;
+                height: 50px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr; /* Одна колонка на мобильных */
+            }
+
+            .official-card {
+                padding: 20px;
+                margin-bottom: 25px;
+            }
+
+            .official-card h2 {
+                font-size: 24px;
+                padding-bottom: 10px;
+            }
+
+            .footer-links {
+                flex-direction: column; /* Ссылки в подвале будут вертикальными */
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 50px;
+                top: 85px;
+                margin-left: -40%;
+                
+            }   
+
+
+            #md{
+                height: 90px;
+                top: 10px;
+                left: 25px;
+                right: 5px;
+            }
+
+            #m {
+               height: 90px;
+               top: 13px;  
+               margin-right: 7px;
+            }
+            
+            .buttons-container button {
+                width: 33%; /* Кнопки занимают всю ширину */
+                font-size: 15px;
+                height: 45px;
+                }
+        }
+
+ .header-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            z-index: 1;
+            transform: translateZ(-1px) scale(2);
+            filter: grayscale(30%) brightness(80%);
+            transition: transform 0.1s ease-out;
+        }
+
+        .buttons-container {
+                width: 150%;
+                left: -25%;
+            }
+
+         @media (max-width: 380px) {
+            h1 {
+                font-size: 45px;
+                position: absolute;
+                top: 25%;
+                left: 90%;
+                transform: translateX(-50%);
+            } 
+
+            .buttons-container {
+                width: 150%;
+                left: -25%;
+            }
+            
+        }
+
+ @media (max-width: 340px) {
+            h1 {
+                font-size: 40px;
+                top: 30%;
+                margin-left: -140px;
+
+            } 
+
+            .buttons-container {
+                width: 150%;
+                left: -25%;
+            }
+            
+        }
+
+
+
+            .buttons-container {
+                width: 150%;
+                left: -25%;
+            }
+            
+        
+
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <img src="https://images.unsplash.com/photo-1516054575922-f0b8eeadec1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="header-image" alt="Imagine sat Hagimus">
+        
+        <img src="cartinki/gerb.png" id="md" alt="gerb">
+        <img src="cartinki/gerb.png" id="m" alt="gerb">
+        
+        <h1>Satul Hagimus</h1>
+        
+        <div class="buttons-container">
+            <button id='c'><i class="fas fa-home"></i> Acasă</button>
+            <button id='d'><i class="fas fa-user-tie"></i> Primarul</button>
+            <button id='e'><i class="fas fa-lightbulb"></i> Proiecte</button>
+            <button id='f'><i class="fas fa-city"></i> Satul</button>
+            <button id='g'><i class="fas fa-images"></i> Fotografii</button>
+            <button id='h'><i class="fas fa-address-book"></i> Contacte</button>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <div class="official-card">
+            <h2><i class="fas fa-bullhorn"></i> Bun venit pe site-ul informativ despre satul Hagimus</h2>
+            <p>Acest site este un proiect personal, creat de un elev al satului Hagimus, cu scopul de a promova cultura, istoria și actualitatea localității. Informațiile sunt corecte și verificate, dar site-ul nu reprezintă oficial Primăria Hagimus.</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="official-card">
+                <h2><i class="fas fa-newspaper"></i>Noutăți din comunitate</h2>
+                <div class="news-item">
+                    <p class="news-date">29 iulie 2024</p>
+                    <p>Restaurarea izvorului „Ioan Vodă”, realizată cu ajutorul grupului civic „Hagimus Cetățeni Activi”.</p>
+                </div>
+                <div class="news-item">
+                    <p class="news-date">31 iulie 2024</p>
+                    <p>Audieri publice privind proiecte legislative pentru veteranii de război, organizate cu sprijinul deputaților locali.</p>
+                </div>
+                <div class="news-item">
+                    <p class="news-date">2 august 2024 </p>
+                    <p>Seminar fiscal despre aplicarea ECC și digitalizarea vânzărilor în regiune.</p>
+                </div>
+             
+            </div>
+
+            <div class="official-card">
+                <h2><i class="fas fa-handshake"></i> Informații utile pentru cetățeni <br>
+                Servicii disponibile în localitate (prin autorități locale sau instituții partenere):</h2>
+                <ul class="service-list">
+                    <li>Acte de identitate</li>
+                    <li>Înregistrare imobile</li>
+                    <li>Autorizații de construcție</li>
+                    <li>Consultanță juridică</li>
+                    <li>Certificate de reședință</li>
+                    <li>Licențe comerciale</li>
+                    <li>Asistență socială</li>
+                </ul>
+               
+            </div>
+
+            <div class="official-card">
+                <h2><i class="fas fa-clock"></i> Istoria satului Hagimus <br>
+                
+                </h2>
+                <p>Satul Hagimus este atestat documentar pentru prima dată în anul 1770, în perioada stăpânirii otomane. Numele satului provine, cel mai probabil, de la un cuvânt turcesc – „hagi”, care desemna o persoană ce a făcut pelerinajul la locurile sfinte.
+
+De-a lungul timpului, satul a fost locuit de moldoveni, dar și de găgăuzi și ucraineni, formând o comunitate multiculturală. În timpul secolelor XIX–XX, localitatea a fost parte din diverse administrații: Imperiul Țarist, România Mare, URSS, iar după 1991 – Republica Moldova.
+
+În perioada sovietică, satul s-a dezvoltat în jurul gospodăriei colective (colhoz), având școală, grădiniță, bibliotecă, casă de cultură și alte instituții importante pentru comunitate.
+
+După independența Moldovei, Hagimus a trecut prin procese de modernizare, dar și prin provocări economice și sociale. Astăzi, este un sat activ, cu oameni gospodari, care păstrează tradițiile și contribuie la dezvoltarea regiunii.
+
+                </p>
+                
+                <div style="margin-top: 25px;">    
+                    
+                
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Satul Hagimus. Acest site este un proiect personal și nu reprezintă oficial Primăria. Toate drepturile rezervate.</p>
+
+            
+            <p>Adresă: Strada Ștefan cel Mare și Sfânt 138,s. Hagimus,<br>
+                 raionul Căușeni, Republica Moldova </p>
+        
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript для параллакс-эффекта
+        document.addEventListener('scroll', function() {
+            const headerImage = document.querySelector('.header-image');
+            const scrollPosition = window.pageYOffset;
+            headerImage.style.transform = 'translateY(' + scrollPosition * 0.4 + 'px) scale(2) translateZ(-1px)';
+        });
+
+        // Обработчики событий для кнопок
+        document.getElementById("c").addEventListener("click", function() {
+            window.location.href = "hag.html";
+        });
+        document.getElementById("d").addEventListener("click", function() {
+            window.location.href = "Prim.html";
+        });
+        document.getElementById("e").addEventListener("click", function() {
+            window.location.href = "proiecte.html";
+        });
+        document.getElementById("f").addEventListener("click", function() {
+            window.location.href = "satul.html";
+        });
+        document.getElementById("g").addEventListener("click", function() {
+            window.location.href = "galer.html";
+        });
+        document.getElementById("h").addEventListener("click", function() {
+            window.location.href = "cont.html";
+        });
+    </script>
+</body>
+</html>
